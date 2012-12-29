@@ -54,7 +54,7 @@ wunderlist.sharing.init = function() {
 	// Called on pressed sharing button
 	$('.list div.sharedlist, .list div.sharelist').live('click', function()
 	{
-		if (Titanium.Network.online == true)
+		if (Ti.Network.online == true)
 		{
 			if (wunderlist.sharing.clickedSharingButton == false)
 			{

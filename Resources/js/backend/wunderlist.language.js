@@ -73,7 +73,7 @@ wunderlist.language.load = function() {
 	// Load the language code
 	code = navigator.language.toLowerCase();
 	code = code[0] + code[1]; // e.g. de or en
-	wunderlist.language.code = Titanium.App.Properties.getString('language', code);
+	wunderlist.language.code = Ti.App.Properties.getString('language', code);
 
 	// Check if the saved language exists
 	languageFound = false;
@@ -91,20 +91,20 @@ wunderlist.language.load = function() {
 	if (languageFound == false)
 	{
 		wunderlist.language.code = 'en';
-		Titanium.App.Properties.setString('language', 'en');
+		Ti.App.Properties.setString('language', 'en');
 	}
 
 	// Load the language file
-	path                        = Titanium.Filesystem.getResourcesDirectory() + "/language";
-	file                        = Titanium.Filesystem.getFile(path, 'english.json');
-	wunderlist.language.data    = Titanium.JSON.parse(file.read());
-	wunderlist.language.english = Titanium.JSON.parse(file.read());
+	path                        = Ti.Filesystem.getResourcesDirectory() + "/language";
+	file                        = Ti.Filesystem.getFile(path, 'english.json');
+	wunderlist.language.data    = Ti.JSON.parse(file.read());
+	wunderlist.language.english = Ti.JSON.parse(file.read());
 	
 	if (wunderlist.language.code != 'en')
 	{
-		path                            = Titanium.Filesystem.getResourcesDirectory() + "/language";
-		file                            = Titanium.Filesystem.getFile(path, wunderlist.language.loaded.file + '.json');
-		wunderlist.language.translation = Titanium.JSON.parse(file.read());
+		path                            = Ti.Filesystem.getResourcesDirectory() + "/language";
+		file                            = Ti.Filesystem.getFile(path, wunderlist.language.loaded.file + '.json');
+		wunderlist.language.translation = Ti.JSON.parse(file.read());
 
 		for (langstring in wunderlist.language.data)
 		{

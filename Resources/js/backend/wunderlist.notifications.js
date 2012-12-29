@@ -15,7 +15,7 @@ wunderlist.notifications = wunderlist.notifications || {};
  */
 wunderlist.notifications.init = function()
 {
-	wunderlist.notification = Titanium.Notification.createNotification(Titanium.UI.createWindow());
+	wunderlist.notification = Ti.Notification.createNotification(Ti.UI.createWindow());
 };
 
 /**

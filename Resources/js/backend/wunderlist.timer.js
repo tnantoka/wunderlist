@@ -24,7 +24,7 @@ wunderlist.timer.init = function()
 			wunderlist.timer.auto_update_seconds--;
 			if(wunderlist.timer.auto_update_seconds === 0)
 			{
-				if(wunderlist.account.isLoggedIn() && Titanium.Network.online == true)
+				if(wunderlist.account.isLoggedIn() && Ti.Network.online == true)
 					$('#sync').click();
 				clearInterval(wunderlist.timer.auto_update_interval);
 				wunderlist.timer.init();
@@ -89,7 +89,7 @@ wunderlist.timer.start = function()
 			wunderlist.timer.total_seconds--;
 			if(wunderlist.timer.total_seconds === 0)
 			{
-				if(wunderlist.account.isLoggedIn() && Titanium.Network.online == true)
+				if(wunderlist.account.isLoggedIn() && Ti.Network.online == true)
 					$('#sync').click();
 
 				clearInterval(wunderlist.timer.interval);

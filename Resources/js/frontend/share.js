@@ -7,12 +7,12 @@ share.init = function() {
 	
 	// Open URL on click
 	$('#cloudtip span.link').live("click", function() {
-		Titanium.Desktop.openURL($(this).text());
+		Ti.Desktop.openURL($(this).text());
 	});
 	
 	// Copy Link into clipboard
 	$('#cloudtip span.copy').live("click", function() {
-		Titanium.UI.Clipboard.setText($('#cloudtip span.link').text());
+		Ti.UI.Clipboard.setText($('#cloudtip span.link').text());
 	});
 };
 
@@ -45,7 +45,7 @@ share.share_by_email = function() {
 			body += "%0d%0a";
 		});
 		
-		Titanium.Desktop.openURL("mailto:?subject=" + name + "&body=" + body + "%0d%0a" + encodeURI(' I generated this list with my task tool Wunderlist from 6 Wunderkinder - Get it from http://www.6wunderkinder.com/wunderlist'));
+		Ti.Desktop.openURL("mailto:?subject=" + name + "&body=" + body + "%0d%0a" + encodeURI(' I generated this list with my task tool Wunderlist from 6 Wunderkinder - Get it from http://www.6wunderkinder.com/wunderlist'));
 	}
 	else
 	{
@@ -123,18 +123,18 @@ share.share_with_cloudapp = function() {
  * @author Christian Reber
  */
 share.print = function() {
-	// NOTE: This is a workaround for printing - Titanium doesn't support window.print(), so we have to do it that way, still cool feature
+	// NOTE: This is a workaround for printing - Ti doesn't support window.print(), so we have to do it that way, still cool feature
 	
 	// Are they any tasks?	
 	if ($('ul.mainlist span.description').length > 0)
 	{
 		// Create the temporary printfile
-		var file = Titanium.Filesystem.getApplicationDataDirectory() + '/print.htm';
-		file     = Titanium.Filesystem.getFile(file);
+		var file = Ti.Filesystem.getApplicationDataDirectory() + '/print.htm';
+		file     = Ti.Filesystem.getFile(file);
 
 		// Load template
-		var template = Titanium.Filesystem.getApplicationDirectory() + '/Resources/print.html';
-		template     = Titanium.Filesystem.getFile(template).read().toString();
+		var template = Ti.Filesystem.getApplicationDirectory() + '/Resources/print.html';
+		template     = Ti.Filesystem.getFile(template).read().toString();
 
 		// Replace List Title
 		template = template.replace(/####LIST####/g, $('#content h1:first').text());
@@ -191,7 +191,7 @@ share.print = function() {
 		else
 			var file_url = 'file:///';
 
-		Titanium.Desktop.openURL(file_url + encodeURI(file));
+		Ti.Desktop.openURL(file_url + encodeURI(file));
 	}
 	else
 	{
@@ -255,8 +255,8 @@ convert_timestamp_into_date = function(timestamp) {
 
 		var today = new Date();
 
-		if (Titanium.App.Properties.hasProperty('dateformat') == true)
-			var dateformat = Titanium.App.Properties.getString('dateformat');
+		if (Ti.App.Properties.hasProperty('dateformat') == true)
+			var dateformat = Ti.App.Properties.getString('dateformat');
 		else
 			var dateformat = wunderlist.language.code;
 

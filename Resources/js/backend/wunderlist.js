@@ -18,8 +18,8 @@ wunderlist.init = function() {
 	wunderlist.setTitle('Wunderlist' + (wunderlist.account.isLoggedIn() && wunderlist.account.email != '' ? ' - ' + wunderlist.account.email : ''));
 	
 	// Set the os version
-	wunderlist.os = Titanium.Platform.name.toLowerCase();
-	wunderlist.version = Titanium.App.version.toString();
+	wunderlist.os = Ti.Platform.name.toLowerCase();
+	wunderlist.version = Ti.App.version.toString();
 	
 	wunderlist.language.init();
 	
@@ -43,11 +43,11 @@ wunderlist.init = function() {
 	wunderlist.updater.checkVersion();	
 	
 	// Add the wunderlist object to the current window
-	Titanium.UI.getCurrentWindow().wunderlist = wunderlist;
+	Ti.UI.getCurrentWindow().wunderlist = wunderlist;
 	
 	// Enable shutdown fix
-	Titanium.API.addEventListener(Titanium.EXIT, function() {
-		Titanium.Platform.canShutdown();
+	Ti.API.addEventListener(Ti.EXIT, function() {
+		Ti.Platform.canShutdown();
 	});
 };
 
@@ -265,7 +265,7 @@ wunderlist.xss_clean = function(str) {
  */
 wunderlist.smartScanForDate = function(string, doNaturalRecognition) {
 	
-	if (Titanium.App.Properties.getInt('enable_natural_date_recognition', 0) === 1) {
+	if (Ti.App.Properties.getInt('enable_natural_date_recognition', 0) === 1) {
 		doNaturalRecognition = true;
 	}
 	

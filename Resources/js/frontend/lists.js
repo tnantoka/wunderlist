@@ -428,7 +428,7 @@ $(function() {
 	// Save the list on "keyup" (ENTER)
 	$('a.list input').live('keyup', function(event) {
 		wunderlist.timer.pause();
-		var aimSetting = parseInt(Titanium.App.Properties.getString('add_item_method', '0'));
+		var aimSetting = parseInt(Ti.App.Properties.getString('add_item_method', '0'));
 		
 		if (event.keyCode == 13 && aimSetting == 0)
 		{

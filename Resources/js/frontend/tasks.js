@@ -237,7 +237,7 @@ $(function() {
 	
 	$("div.add input").live('keyup', function(e) {
 		wunderlist.timer.pause();
-		var aimSetting = parseInt(Titanium.App.Properties.getString('add_item_method', '0'));
+		var aimSetting = parseInt(Ti.App.Properties.getString('add_item_method', '0'));
 		
 		// If not empty and Return gets pressed, new task will be added
 		if(e.keyCode == 13 && aimSetting == 0)
@@ -307,9 +307,9 @@ $(function() {
 	});
 	
 	// For testing purposes, to null the count, just uncomment this
-	//Titanium.App.Properties.setInt('number_of_shown_add_task_hints', 0);
+	//Ti.App.Properties.setInt('number_of_shown_add_task_hints', 0);
 	
-	var numberOfShownHints = Titanium.App.Properties.getInt('number_of_shown_add_task_hints', 0) + 1;
+	var numberOfShownHints = Ti.App.Properties.getInt('number_of_shown_add_task_hints', 0) + 1;
 	var isShowingAgain = false;
 	if (numberOfShownHints < 5) {
 		$('.add_task_hint:hidden').live('click', function () { alert(); });
@@ -339,7 +339,7 @@ $(function() {
 				}
 			}, 200);		
 		});
-		Titanium.App.Properties.setInt('number_of_shown_add_task_hints', numberOfShownHints);
+		Ti.App.Properties.setInt('number_of_shown_add_task_hints', numberOfShownHints);
 	}
 	
 	$('.addwrapper input').live('focus', function () {

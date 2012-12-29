@@ -239,7 +239,7 @@ html.generateCreditsDialogHTML = function() {
 		'<b>What´s next?</b><br><br>' +
 		'We are currently working on something pretty big. We call it <b>Wunderkit</b>, an online business platform that will change the way you look at corporate software products.<br /><br />' +
 		'We hope you enjoy our first tool to make your daily life more effective and enjoyable.<br><br>' + 
-		'<strong>Wunderlist</strong> - ' + Titanium.App.version + '</p>';
+		'<strong>Wunderlist</strong> - ' + Ti.App.version + '</p>';
 
 		return html_code;
 };
@@ -377,8 +377,8 @@ html.generateEditProfileDialogHTML = function() {
  * @author Christian Reber
  */
 html.showDateByLanguage = function(object, day, month, year) {
-	if(Titanium.App.Properties.hasProperty('dateformat') == true)
-		var dateformat = Titanium.App.Properties.getString('dateformat');
+	if(Ti.App.Properties.hasProperty('dateformat') == true)
+		var dateformat = Ti.App.Properties.getString('dateformat');
 	else
 		var dateformat = wunderlist.language.code;
 
@@ -654,9 +654,9 @@ html.createDatepicker = function() {
 	var monthNamesShortDE = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
 
 	// Check for starting day of the week
-	if (Titanium.App.Properties.hasProperty('weekstartday') == true)
+	if (Ti.App.Properties.hasProperty('weekstartday') == true)
 	{
-		var firstDay = Titanium.App.Properties.getString('weekstartday', '1');
+		var firstDay = Ti.App.Properties.getString('weekstartday', '1');
 	}
 	else
 	{
@@ -669,7 +669,7 @@ html.createDatepicker = function() {
 			var firstDay = 0;
 		}
 
-		Titanium.App.Properties.setString('weekstartday', firstDay.toString());
+		Ti.App.Properties.setString('weekstartday', firstDay.toString());
 	}
 
 	if (wunderlist.language.code == 'de')
@@ -1025,12 +1025,12 @@ html.xss_clean = function(str) {
 $(function() {
 	// Open every link in the browser
 	$('a[href^=http], a[href^=https], a[href^=ftp], a[href^=mailto]').live('click', function() {
-		Titanium.Desktop.openURL(this.href);
+		Ti.Desktop.openURL(this.href);
 		return false;
 	});
 	
 	// Open every file in the finder app
 	$('span.openApp').live('click', function() {
-		Titanium.Platform.openApplication($.trim($(this).text()));
+		Ti.Platform.openApplication($.trim($(this).text()));
 	});
 });

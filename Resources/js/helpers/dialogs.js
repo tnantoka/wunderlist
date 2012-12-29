@@ -417,8 +417,8 @@ dialogs.openSwitchDateFormatDialog = function() {
 			var new_dateformat = $('div.radios#date-format-radios input:checked').val();
 			var weekstart_day  = $('div.radios#week-start-day-radios input:checked').val();
 	
-			Titanium.App.Properties.setString('weekstartday', weekstart_day.toString());
-			Titanium.App.Properties.setString('dateformat', new_dateformat);
+			Ti.App.Properties.setString('weekstartday', weekstart_day.toString());
+			Ti.App.Properties.setString('dateformat', new_dateformat);
 	
 			$('input.datepicker').datepicker('destroy');
 			
@@ -453,7 +453,7 @@ dialogs.openSidebarDialog = function() {
 		$('input#cancel-settings').die();
 		$('input#confirm-settings').die();
 	
-		var sidebar_position = (Titanium.App.Properties.getString('sidebar_position', 'right') == 'right') ? 0 : 1;
+		var sidebar_position = (Ti.App.Properties.getString('sidebar_position', 'right') == 'right') ? 0 : 1;
 		$('div.radios#sidebar-position-radios input#sidebar_position_' + sidebar_position).attr('checked', 'checked');
 	
 		$('input#cancel-settings').live('click', function() {
@@ -462,7 +462,7 @@ dialogs.openSidebarDialog = function() {
 	
 		$('input#confirm-settings').live('click', function() {
 			var new_sidebar_position = ($('div.radios#sidebar-position-radios input:checked').val() == 0) ? 'right' : 'left';
-			Titanium.App.Properties.setString('sidebar_position', new_sidebar_position);
+			Ti.App.Properties.setString('sidebar_position', new_sidebar_position);
 				
 			sidebar.initPosition();
 						
@@ -487,7 +487,7 @@ dialogs.openDeletePromptDialog = function() {
 		$('input#cancel-settings').die();
 		$('input#confirm-settings').die();	
 		
-		var delete_prompt = Titanium.App.Properties.getString('delete_prompt', '1');
+		var delete_prompt = Ti.App.Properties.getString('delete_prompt', '1');
 		$('div.radios#task-delete-radios input#task_delete_' + delete_prompt).attr('checked', 'checked');
 		
 		$('input#cancel-settings').live('click', function() {
@@ -496,7 +496,7 @@ dialogs.openDeletePromptDialog = function() {
 		
 		$('input#confirm-settings').live('click', function() {
 			var new_delete_prompt = $('div.radios#task-delete-radios input:checked').val();
-			Titanium.App.Properties.setString('delete_prompt', new_delete_prompt.toString());		
+			Ti.App.Properties.setString('delete_prompt', new_delete_prompt.toString());		
 			dialogs.closeDialog(dialogs.deletePromptDialog);
 		});	
 	}
@@ -518,7 +518,7 @@ dialogs.openSelectAddItemMethodDialog = function() {
 		$('input#cancel-settings').die();
 		$('input#confirm-settings').die();	
 		
-		var add_item_method = Titanium.App.Properties.getString('add_item_method', '0');
+		var add_item_method = Ti.App.Properties.getString('add_item_method', '0');
 		$('div.radios#add-item-method-radios input#add_item_method_' + add_item_method).attr('checked', 'checked');
 		
 		$('input#cancel-settings').live('click', function() {
@@ -527,7 +527,7 @@ dialogs.openSelectAddItemMethodDialog = function() {
 		
 		$('input#confirm-settings').live('click', function() {
 			var new_add_item_method = $('div.radios#add-item-method-radios input:checked').val();
-			Titanium.App.Properties.setString('add_item_method', new_add_item_method.toString());		
+			Ti.App.Properties.setString('add_item_method', new_add_item_method.toString());		
 			dialogs.closeDialog(dialogs.addItemMethodDialog);
 		});	
 	}

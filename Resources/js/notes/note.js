@@ -1,7 +1,7 @@
-var main       = Titanium.UI.getMainWindow();
+var main       = Ti.UI.getMainWindow();
 var mainWindow = main.getDOMWindow();
 var wunderlist = main.wunderlist;
-var note 	   = Titanium.UI.getCurrentWindow();
+var note 	   = Ti.UI.getCurrentWindow();
 
 note.onReady = function() {
 	// Setting Note Title
@@ -74,7 +74,7 @@ note.saveAndClose = function() {
 	note.close();
 };
 
-note.addEventListener(Titanium.FOCUSED, function() {
+note.addEventListener(Ti.FOCUSED, function() {
 	if (note.focused == false) {
 		note.onReady();
 		note.focused = true;
@@ -91,7 +91,7 @@ $(function() {
 	$('span.hint').text(wunderlist.ucfirst(mainWindow.settings.shortcutkey) +' + '+ wunderlist.language.data.return_key +': ' + wunderlist.language.data.save_and_close_changes);
 	
 	$('input#delete').live('click', function() {
-		if (Titanium.App.Properties.getString('delete_prompt', '1') == 1) {
+		if (Ti.App.Properties.getString('delete_prompt', '1') == 1) {
 			dialogs.openNoteDeleteDialog();
 		} else {
 			$('input#save').trigger('deleteNote');
@@ -173,13 +173,13 @@ $(function() {
 	
 	// Open every link in the browser
 	$('a[href^=http], a[href^=https], a[href^=ftp], a[href^=mailto]').live('click', function() {
-		Titanium.Desktop.openURL(this.href);
+		Ti.Desktop.openURL(this.href);
 		return false;
 	});
 	
 	// Open every file in the finder app
 	$('span.openApp').live('click', function() {
-		Titanium.Platform.openApplication($.trim($(this).text()));
+		Ti.Platform.openApplication($.trim($(this).text()));
 	});
 	
 	// Shortcut Bind Esc - close window

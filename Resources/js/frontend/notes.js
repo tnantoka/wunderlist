@@ -16,18 +16,18 @@ notes.windows = [];
  */
 notes.openNotesWindow = function() {
 	if (notes.windows[notes.currentNoteId] == null) {
-			var notesWindow = Titanium.UI.getCurrentWindow().createWindow({
+			var notesWindow = Ti.UI.getCurrentWindow().createWindow({
 				url       : "app://note.html",
-				width     : parseInt(Titanium.App.Properties.getString('note_user_width', '500')),
+				width     : parseInt(Ti.App.Properties.getString('note_user_width', '500')),
 		        minWidth  : 500,
-		        height    : parseInt(Titanium.App.Properties.getString('note_user_height', '400')),
+		        height    : parseInt(Ti.App.Properties.getString('note_user_height', '400')),
 		        minHeight : 400,
-		        maximized : Titanium.App.Properties.getString('maximized', 'false'),
+		        maximized : Ti.App.Properties.getString('maximized', 'false'),
 				fullscreenBehaviour: 256
 			});
 
-			note_user_x = Titanium.App.Properties.getString('note_user_x', 'none');
-			note_user_y = Titanium.App.Properties.getString('note_user_y', 'none');
+			note_user_x = Ti.App.Properties.getString('note_user_x', 'none');
+			note_user_y = Ti.App.Properties.getString('note_user_y', 'none');
 
 			//if(note_user_x != 'none') notes.window.x = parseInt(note_user_x);
 			//if(note_user_y != 'none') notes.window.y = parseInt(note_user_y);
@@ -43,7 +43,7 @@ notes.openNotesWindow = function() {
 		notesWindow.focused   = false;
 		notesWindow.focus();
 
-		notesWindow.addEventListener(Titanium.CLOSE, function(e) {
+		notesWindow.addEventListener(Ti.CLOSE, function(e) {
 			if (notesWindow.editMode) {
 				notesWindow.forceSave();
 			}

@@ -217,14 +217,14 @@ $(document).ready(function() {
 	 */
 	background.init();
 
-	var $theme = Titanium.App.Properties.getString("active_theme");
+	var $theme = Ti.App.Properties.getString("active_theme");
 	$("." + $theme).click();
 
     // Fixes a problem with webkit and jquery sortable icon
     document.onselectstart = function () {return false;};
 
 	// If program has been opened 5 times, open the invite dialog
-	runtime = Titanium.App.Properties.getString('runtime');
+	runtime = Ti.App.Properties.getString('runtime');
 	if(runtime % 10 == 0 && settings.invited == 'false')
 		wunderlist.account.showInviteDialog();
 	

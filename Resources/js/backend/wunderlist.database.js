@@ -14,8 +14,8 @@ wunderlist.database = wunderlist.database || {};
  * @author Daniel Marschner
  */
 wunderlist.database.init = function() {
-	wunderlist.database.path = Titanium.Filesystem.getFile(Titanium.Filesystem.getApplicationDataDirectory(), 'wunderlist.db');
-	wunderlist.database.db   = Titanium.Database.openFile(wunderlist.database.path);
+	wunderlist.database.path = Ti.Filesystem.getFile(Ti.Filesystem.getApplicationDataDirectory(), 'wunderlist.db');
+	wunderlist.database.db   = Ti.Database.openFile(wunderlist.database.path);
 	wunderlist.database.create();
 };
 
@@ -26,13 +26,13 @@ wunderlist.database.init = function() {
  */
 wunderlist.database.create = function() {
 	// TODO: Did we need that? Test it!
-	if (Titanium.App.Properties.hasProperty('prefinal_first_run') == false)
+	if (Ti.App.Properties.hasProperty('prefinal_first_run') == false)
 	{
 		var sql 	= "DROP TABLE IF EXISTS lists";
 		wunderlist.database.db.execute(sql);
 		sql 		= "DROP TABLE IF EXISTS tasks";
 		wunderlist.database.db.execute(sql);
-		Titanium.App.Properties.setString('prefinal_first_run', '1');
+		Ti.App.Properties.setString('prefinal_first_run', '1');
 	}
 	
 	wunderlist.database.db.execute("CREATE TABLE IF NOT EXISTS lists (id INTEGER PRIMARY KEY AUTOINCREMENT, online_id INTEGER DEFAULT 0, name TEXT, position INTEGER DEFAULT 0, version INTEGER DEFAULT 0, deleted INTEGER DEFAULT 0, inbox INTEGER DEFAULT 0, shared INTEGER DEFAULT 0)");

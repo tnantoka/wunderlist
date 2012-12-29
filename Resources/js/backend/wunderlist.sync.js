@@ -29,7 +29,7 @@ wunderlist.sync.init = function() {
 	$('#sync').click(function() {
 		if (wunderlist.sync.isSyncing == false)
 		{
-			if (Titanium.Network.online == true)
+			if (Ti.Network.online == true)
 			{
 				wunderlist.timer.stop();
 				wunderlist.sync.fireSync();
@@ -80,7 +80,7 @@ wunderlist.sync.fireSync = function(logOutAfterSync, exitAfterSync, list_id) {
 		exitAfterSync = false;
 	}
 	
-	if (Titanium.Network.online == false)
+	if (Ti.Network.online == false)
 	{
 		dialogs.showErrorDialog(wunderlist.language.data.no_internet);
 		
@@ -92,7 +92,7 @@ wunderlist.sync.fireSync = function(logOutAfterSync, exitAfterSync, list_id) {
 		
 		if (exitAfterSync == true)
 		{
-			Titanium.App.exit();
+			Ti.App.exit();
 		}
 	}
 	
@@ -123,7 +123,7 @@ wunderlist.sync.fireSync = function(logOutAfterSync, exitAfterSync, list_id) {
 	}
 	else
 	{
-		if (Titanium.Network.online == true)
+		if (Ti.Network.online == true)
 		{		
 			if (wunderlist.sync.isSyncing == false)
 			{
@@ -462,7 +462,7 @@ wunderlist.sync.syncSuccess = function(response_step1, logOutAfterSync, exitAfte
 	// Exit after sync callback
 	if (exitAfterSync == true)
 	{
-		Titanium.App.exit();
+		Ti.App.exit();
 	}
 };
 

@@ -134,11 +134,11 @@ filters.updateBadges = function() {
 
 	if(countAll == 0)
 	{
-		Titanium.UI.setBadge(null);
+		Ti.UI.setBadge(null);
 	}
 	else
 	{
-		Titanium.UI.setBadge(countAll.toString());
+		Ti.UI.setBadge(countAll.toString());
 	}
 };
 
@@ -148,7 +148,7 @@ filters.updateBadges = function() {
  * @author Christian Reber
  */
 filters.clearBadges = function() {
-	Titanium.UI.setBadge('');
+	Ti.UI.setBadge('');
 	$('#left a#today span').remove();
 	$('div#sidebar div#notification').hide();
 };

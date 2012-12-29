@@ -1,5 +1,5 @@
 wunderlist.account       = wunderlist.account || {};
-wunderlist.account.email = Titanium.App.Properties.getString('email', '');
+wunderlist.account.email = Ti.App.Properties.getString('email', '');
 
 var register_dialog;
 var invite_dialog;
@@ -60,9 +60,9 @@ wunderlist.account.init = function() {
  * @author Dennis Schneider
  */
 wunderlist.account.createUser = function(email, password) {
-	Titanium.App.Properties.setString('logged_in', 'true');
-	Titanium.App.Properties.setString('email', email.toString());
-	Titanium.App.Properties.setString('password', password.toString());
+	Ti.App.Properties.setString('logged_in', 'true');
+	Ti.App.Properties.setString('email', email.toString());
+	Ti.App.Properties.setString('password', password.toString());
 	
 	wunderlist.account.email = email;
 							
@@ -76,7 +76,7 @@ wunderlist.account.createUser = function(email, password) {
  * @author Dennis Schneider
  */
 wunderlist.account.logUserOut = function() {
-	Titanium.App.Properties.setString('logged_in', 'false');
+	Ti.App.Properties.setString('logged_in', 'false');
 	wunderlist.account.deleteUserCredentials();
 };
 
@@ -86,7 +86,7 @@ wunderlist.account.logUserOut = function() {
  * @author Dennis Schneider
  */
 wunderlist.account.isLoggedIn = function() {
-	logged_in = Titanium.App.Properties.getString('logged_in', 'false');
+	logged_in = Ti.App.Properties.getString('logged_in', 'false');
 	if (logged_in == 'true')
 		return true;
 	else
@@ -100,8 +100,8 @@ wunderlist.account.isLoggedIn = function() {
  */
 wunderlist.account.getUserCredentials = function() {
 	values = {
-		'email': Titanium.App.Properties.getString('email', ''),
-		'password': Titanium.App.Properties.getString('password', '') // encrypted !
+		'email': Ti.App.Properties.getString('email', ''),
+		'password': Ti.App.Properties.getString('password', '') // encrypted !
 	};
 
  	return values;
@@ -114,8 +114,8 @@ wunderlist.account.getUserCredentials = function() {
  * @author Dennis Schneider
  */
 wunderlist.account.deleteUserCredentials = function() {
-	Titanium.App.Properties.setString('email', '');
-	Titanium.App.Properties.setString('password', '');
+	Ti.App.Properties.setString('email', '');
+	Ti.App.Properties.setString('password', '');
 };
 
 /**
@@ -372,7 +372,7 @@ wunderlist.account.login = function() {
 		'email'    : $.trim($('input#login-email').val().toLowerCase()),
 		'password' : $.trim($('input#login-password').val()),
 		'device'   : 'desktop',
-		'version'  : parseInt(wunderlist.str_replace('.', '', Titanium.App.version.toString())),
+		'version'  : parseInt(wunderlist.str_replace('.', '', Ti.App.version.toString())),
 		'offset'   : wunderlist.timer.getTimezoneOffset(),
 		'language' : navigator.language
 	};
@@ -384,7 +384,7 @@ wunderlist.account.login = function() {
 		if (newsletter == true)
 			data['newsletter'] = 1;
 		
-		data['password'] = Titanium.Codec.digestToHex(Titanium.Codec.MD5, data['password']);
+		data['password'] = Ti.Codec.digestToHex(Ti.Codec.MD5, data['password']);
 		
 		Layout.startLoginAnimation();
 
@@ -561,7 +561,7 @@ wunderlist.account.register = function(onlyRegister, registerOnLogin) {
 		'email'    : (registerOnLogin == true) ? $.trim($('input#login-email').val().toLowerCase()) : $.trim($('input#register-email').val().toLowerCase()),
 		'password' : (registerOnLogin == true) ? $.trim($('input#login-password').val()) : $.trim($('input#register-password').val()),
 		'device'   : 'desktop',
-		'version'  : parseInt(wunderlist.str_replace('.', '', Titanium.App.version.toString())),
+		'version'  : parseInt(wunderlist.str_replace('.', '', Ti.App.version.toString())),
 		'offset'   : wunderlist.timer.getTimezoneOffset(),
 		'language' : navigator.language
 	};
@@ -573,7 +573,7 @@ wunderlist.account.register = function(onlyRegister, registerOnLogin) {
 		if (newsletter == true)
 			data['newsletter'] = 1;
 		
-		data['password'] = Titanium.Codec.digestToHex(Titanium.Codec.MD5, data['password']);
+		data['password'] = Ti.Codec.digestToHex(Ti.Codec.MD5, data['password']);
 		
 		Layout.startLoginAnimation();
 
@@ -744,7 +744,7 @@ wunderlist.account.change_profile_data = function() {
 	new_password = $('input#new_password').val();
 	if (new_password != wunderlist.language.data.new_password && new_password != '')
 	{
-		data['new_password'] = Titanium.Codec.digestToHex(Titanium.Codec.MD5, new_password);
+		data['new_password'] = Ti.Codec.digestToHex(Ti.Codec.MD5, new_password);
 	}
 
 	// Does the user want to change something?
@@ -752,7 +752,7 @@ wunderlist.account.change_profile_data = function() {
 		return false;
 
 	// Is the old password given and correct?
-	if ($('#old_password').val() == '' || data['password'] != Titanium.Codec.digestToHex(Titanium.Codec.MD5, $('#old_password').val()))
+	if ($('#old_password').val() == '' || data['password'] != Ti.Codec.digestToHex(Ti.Codec.MD5, $('#old_password').val()))
 	{
 		dialogs.showErrorDialog(wunderlist.language.data.wrong_password);
 		return false;
@@ -889,7 +889,7 @@ wunderlist.account.delete_account_data = function() {
 	
 	var data = {
 		'email'    : $.trim($('input#delete_email').val().toLowerCase()),
-		'password' : Titanium.Codec.digestToHex(Titanium.Codec.MD5, $.trim($('input#delete_password').val()))
+		'password' : Ti.Codec.digestToHex(Ti.Codec.MD5, $.trim($('input#delete_password').val()))
 	};
 	
 	if (ucs['email'] != data['email'])
@@ -974,7 +974,7 @@ wunderlist.account.logout = function() {
 		
 		// Show register Dialog
 		wunderlist.account.showRegisterDialog();
-		Titanium.UI.setBadge(null);
+		Ti.UI.setBadge(null);
 	}
 	else
 	{

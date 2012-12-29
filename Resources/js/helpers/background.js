@@ -64,7 +64,7 @@ background.init = function() {
 			});
 			$('body').css('background','none');
 			styleActive(this);
-			Titanium.App.Properties.setString('active_theme', bgClass);
+			Ti.App.Properties.setString('active_theme', bgClass);
 		});
 	});
 

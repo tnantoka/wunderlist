@@ -64,7 +64,7 @@ $(function() {
 			if (listShortcutListener == 0)
 			{
 				settings.save_window_position();
-				Titanium.App.exit();
+				Ti.App.exit();
 			}
 		});
 	}
@@ -299,7 +299,7 @@ $(function() {
 	shortcut.add(settings.shortcutkey + '+Enter', function (event) {
 		if ($('input.input-add:focus').length == 1)
 		{
-			var aimSetting = parseInt(Titanium.App.Properties.getString('add_item_method', '0'));
+			var aimSetting = parseInt(Ti.App.Properties.getString('add_item_method', '0'));
 			
 			if (aimSetting == 1)
 			{		
@@ -310,7 +310,7 @@ $(function() {
 		}
 		else if ($('a.list input:focus').length == 1)
 		{
-			var aimSetting = parseInt(Titanium.App.Properties.getString('add_item_method', '0'));
+			var aimSetting = parseInt(Ti.App.Properties.getString('add_item_method', '0'));
 			
 			if (aimSetting == 1)
 			{

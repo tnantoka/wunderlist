@@ -6,7 +6,7 @@ var menu = menu || {};
  * @author Christian Reber
  */
 menu.reset_window_size = function() {
-	var currentWindow = Titanium.UI.getMainWindow();
+	var currentWindow = Ti.UI.getMainWindow();
 	
 	currentWindow.height = 400;
 	currentWindow.width  = 600;
@@ -20,7 +20,7 @@ menu.reset_window_size = function() {
  * @author Christian Reber
  */
 menu.reset_note_window = function() {
-	var currentWindows = Titanium.UI.getOpenWindows();
+	var currentWindows = Ti.UI.getOpenWindows();
 	
 	for (x in currentWindows) {
 		if (currentWindows[x].noteId != undefined) {
@@ -41,7 +41,7 @@ menu.reset_note_window = function() {
  * @author Daniel Marschner
  */
 menu.initialize = function() {
-	var new_menu          = Titanium.UI.createMenu();
+	var new_menu          = Ti.UI.createMenu();
 	var accountMenuItem	  = new_menu.addItem(wunderlist.language.data.account);
 	var extraMenuItem	  = new_menu.addItem(wunderlist.language.data.settings);
 	var downloadsMenuItem = new_menu.addItem(wunderlist.language.data.downloads);
@@ -66,18 +66,18 @@ menu.initialize = function() {
 	extraMenuItem.addItem(wunderlist.language.data.sidebar_position, function() { dialogs.openSidebarDialog(); menu.refocus(); });
 	extraMenuItem.addItem(wunderlist.language.data.delete_prompt_menu, function() { dialogs.openDeletePromptDialog(); menu.refocus(); });
 
-	var isNaturalDateRecognitionEnabled = Titanium.App.Properties.getInt('enable_natural_date_recognition', 0);
+	var isNaturalDateRecognitionEnabled = Ti.App.Properties.getInt('enable_natural_date_recognition', 0);
 	var enableNaturalDateRecognitionMenuString = wunderlist.language.data.enable_natural_date_recognition;
 	if (isNaturalDateRecognitionEnabled === 1) {
 		enableNaturalDateRecognitionMenuString = wunderlist.language.data.disable_natural_date_recognition;
 	}
 	extraMenuItem.addItem(enableNaturalDateRecognitionMenuString, function () {
-		var isNaturalDateRecognitionEnabled = Titanium.App.Properties.getInt('enable_natural_date_recognition', 0);
+		var isNaturalDateRecognitionEnabled = Ti.App.Properties.getInt('enable_natural_date_recognition', 0);
 		if (isNaturalDateRecognitionEnabled === 1) {
-			Titanium.App.Properties.setInt('enable_natural_date_recognition', 0);
+			Ti.App.Properties.setInt('enable_natural_date_recognition', 0);
 			this.getSubmenu().getItemAt(5).setLabel(wunderlist.language.data.enable_natural_date_recognition);
 		} else {
-			Titanium.App.Properties.setInt('enable_natural_date_recognition', 1);
+			Ti.App.Properties.setInt('enable_natural_date_recognition', 1);
 			this.getSubmenu().getItemAt(5).setLabel(wunderlist.language.data.disable_natural_date_recognition);
 		}
 	});
@@ -89,16 +89,16 @@ menu.initialize = function() {
 	// Create Tutorials
 	extraMenuItem.addItem(wunderlist.language.data.create_tutorials, function() { wunderlist.database.recreateTuts(); menu.refocus(); });
 
-	aboutUsMenuItem.addItem('Knowledge Base',    function() {Titanium.Desktop.openURL('http://support.6wunderkinder.com/kb')});
-	//aboutUsMenuItem.addItem(wunderlist.language.data.privacy_policy,  function() {Titanium.Desktop.openURL('http://www.6wunderkinder.com')});
+	aboutUsMenuItem.addItem('Knowledge Base',    function() {Ti.Desktop.openURL('http://support.6wunderkinder.com/kb')});
+	//aboutUsMenuItem.addItem(wunderlist.language.data.privacy_policy,  function() {Ti.Desktop.openURL('http://www.6wunderkinder.com')});
 	aboutUsMenuItem.addItem(wunderlist.language.data.credits,         openCreditsDialog);  // About Us Dialog
 	aboutUsMenuItem.addItem(wunderlist.language.data.backgrounds,     openBackgroundsDialog);  // Background Credits
-	aboutUsMenuItem.addItem(wunderlist.language.data.wunderkinder,    function() {Titanium.Desktop.openURL('http://www.6wunderkinder.com')});
-	aboutUsMenuItem.addItem(wunderlist.language.data.wunderkinder_tw, function() {Titanium.Desktop.openURL('http://www.twitter.com/6Wunderkinder')});
-	aboutUsMenuItem.addItem(wunderlist.language.data.wunderkinder_fb, function() {Titanium.Desktop.openURL('http://www.facebook.com/6Wunderkinder')});
-	aboutUsMenuItem.addItem(wunderlist.language.data.privacy_policy, function() {Titanium.Desktop.openURL('http://www.6wunderkinder.com/privacy-policy/')});
+	aboutUsMenuItem.addItem(wunderlist.language.data.wunderkinder,    function() {Ti.Desktop.openURL('http://www.6wunderkinder.com')});
+	aboutUsMenuItem.addItem(wunderlist.language.data.wunderkinder_tw, function() {Ti.Desktop.openURL('http://www.twitter.com/6Wunderkinder')});
+	aboutUsMenuItem.addItem(wunderlist.language.data.wunderkinder_fb, function() {Ti.Desktop.openURL('http://www.facebook.com/6Wunderkinder')});
+	aboutUsMenuItem.addItem(wunderlist.language.data.privacy_policy, function() {Ti.Desktop.openURL('http://www.6wunderkinder.com/privacy-policy/')});
 	//aboutUsMenuItem.addSeparatorItem();
-	//aboutUsMenuItem.addItem(wunderlist.language.data.changelog, function() {Titanium.Desktop.openURL('http://www.6wunderkinder.com/wunderlist/changelog')});
+	//aboutUsMenuItem.addItem(wunderlist.language.data.changelog, function() {Ti.Desktop.openURL('http://www.6wunderkinder.com/wunderlist/changelog')});
 
 	if (wunderlist.account.isLoggedIn())
 	{
@@ -119,14 +119,14 @@ menu.initialize = function() {
 		});
 	}
 
-	downloadsMenuItem.addItem('iPhone',  function () { Titanium.Desktop.openURL('http://itunes.apple.com/us/app/wunderlist-to-do-listen/id406644151') });
-	downloadsMenuItem.addItem('iPad',    function () { Titanium.Desktop.openURL('http://itunes.apple.com/us/app/wunderlist-hd/id420670429') });
-	downloadsMenuItem.addItem('Android', function () { Titanium.Desktop.openURL('http://market.android.com/details?id=com.wunderkinder.wunderlistandroid') });
-	downloadsMenuItem.addItem('Mac OSX', function () { Titanium.Desktop.openURL('http://www.6wunderkinder.com/wunderlist') });
-	downloadsMenuItem.addItem('Windows', function () { Titanium.Desktop.openURL('http://www.6wunderkinder.com/wunderlist') });
+	downloadsMenuItem.addItem('iPhone',  function () { Ti.Desktop.openURL('http://itunes.apple.com/us/app/wunderlist-to-do-listen/id406644151') });
+	downloadsMenuItem.addItem('iPad',    function () { Ti.Desktop.openURL('http://itunes.apple.com/us/app/wunderlist-hd/id420670429') });
+	downloadsMenuItem.addItem('Android', function () { Ti.Desktop.openURL('http://market.android.com/details?id=com.wunderkinder.wunderlistandroid') });
+	downloadsMenuItem.addItem('Mac OSX', function () { Ti.Desktop.openURL('http://www.6wunderkinder.com/wunderlist') });
+	downloadsMenuItem.addItem('Windows', function () { Ti.Desktop.openURL('http://www.6wunderkinder.com/wunderlist') });
 
 	menu.remove();
-	Titanium.UI.setMenu(new_menu);
+	Ti.UI.setMenu(new_menu);
 }
 
 /**
@@ -135,7 +135,7 @@ menu.initialize = function() {
  * @author Dennis Schneider
  */
 menu.initializeTrayIcon = function() {
-	var os = Titanium.Platform.name.toLowerCase();
+	var os = Ti.Platform.name.toLowerCase();
 
 	// Only for windows and linux
 	if(os != 'notray')
@@ -147,35 +147,35 @@ menu.initializeTrayIcon = function() {
         }
         else
         {
-        	var wunderlistWindow = Titanium.UI.getCurrentWindow();
+        	var wunderlistWindow = Ti.UI.getCurrentWindow();
         }
 
 		/*if (os != 'darwin')
-			var trayIconPath = Titanium.API.Application.getResourcesPath() + '/images/traywin.png';
+			var trayIconPath = Ti.API.Application.getResourcesPath() + '/images/traywin.png';
 		else
-			var trayIconPath = Titanium.API.Application.getResourcesPath() + '/images/traymac.png';
+			var trayIconPath = Ti.API.Application.getResourcesPath() + '/images/traymac.png';
 		
 		// Show the window again in windows and linux, when clicking the tray icon
 		if (os != 'darwin')
 		{
-			var trayIcon = Titanium.UI.addTray(trayIconPath, function () {
+			var trayIcon = Ti.UI.addTray(trayIconPath, function () {
 				menu.showWindow(wunderlistWindow)
 			});
 		}
 		else
 		{
-			var trayIcon = Titanium.UI.addTray(trayIconPath);
+			var trayIcon = Ti.UI.addTray(trayIconPath);
 		}
 		trayIcon.setHint('Wunderlist - todo application')
 
-		var trayMenu         = Titanium.UI.createMenu();
+		var trayMenu         = Ti.UI.createMenu();
 		var trayExitItem	 = trayMenu.addItem(wunderlist.language.data.exit_wunderlist, menu.exitWunderlist);
 		
 		trayIcon.setMenu(trayMenu);*/
 
 		if (os == 'darwin')
 		{
-			Titanium.on("reopen", function (e) {
+			Ti.on("reopen", function (e) {
 				if (!e.hasVisibleWindows) 
 				{
 					wunderlistWindow.show();
@@ -186,9 +186,9 @@ menu.initializeTrayIcon = function() {
 	}
 	else
 	{
-		var wunderlistWindow = Titanium.UI.getCurrentWindow();	
+		var wunderlistWindow = Ti.UI.getCurrentWindow();	
 	
-		wunderlistWindow.addEventListener(Titanium.CLOSE, function(event) {
+		wunderlistWindow.addEventListener(Ti.CLOSE, function(event) {
 			if (wunderlist.account.isLoggedIn() == true) 
 			{
 				wunderlist.sync.fireSync(false, true);
@@ -205,16 +205,16 @@ menu.initializeTrayIcon = function() {
  */
 menu.exitWunderlist = function() {
 	// If the user is logged in and internet is available
-	if (wunderlist.account.isLoggedIn() && Titanium.Network.online == true)
+	if (wunderlist.account.isLoggedIn() && Ti.Network.online == true)
 	{
 		wunderlist.sync.fireSync(false, true);
 	}
 	else
 	{
-		Titanium.App.exit()
+		Ti.App.exit()
 	}
 
-	//Titanium.UI.Tray.remove();
+	//Ti.UI.Tray.remove();
 }
  
 
@@ -224,9 +224,9 @@ menu.exitWunderlist = function() {
  * @author Dennis Schneider
  */
 menu.preventCloseEvent = function() {
-	var wunderlistWindow = Titanium.UI.getCurrentWindow();
+	var wunderlistWindow = Ti.UI.getCurrentWindow();
 
-	wunderlistWindow.addEventListener(Titanium.CLOSE, function(event) {
+	wunderlistWindow.addEventListener(Ti.CLOSE, function(event) {
 		wunderlistWindow.hide();
 	    event.preventDefault();
 	    return false;
@@ -251,8 +251,8 @@ menu.showWindow = function(wunderlistWindow) {
  */
 menu.switch_language = function(code) {
 	settings.save_window_position();
-	Titanium.App.Properties.setString('language', code);
-	Titanium.App.restart();
+	Ti.App.Properties.setString('language', code);
+	Ti.App.restart();
 }
 
 /**
@@ -261,9 +261,9 @@ menu.switch_language = function(code) {
  * @author Dennis Schneider
  */
 menu.remove = function() {
-	if(Titanium.UI.Menu != undefined)
+	if(Ti.UI.Menu != undefined)
 	{
-		Titanium.UI.menu.clear();
+		Ti.UI.menu.clear();
 	}
 }
 
@@ -273,7 +273,7 @@ menu.remove = function() {
  * @author Dennis Schneider
  */
 menu.refocus = function() {
-	var wunderlistWindow = Titanium.UI.getCurrentWindow();
+	var wunderlistWindow = Ti.UI.getCurrentWindow();
 	wunderlistWindow.show();
 	wunderlistWindow.focus();
 }
